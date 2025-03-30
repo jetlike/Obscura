@@ -1,2 +1,10 @@
+# Ignore virtual environment folders
 venv/
-node_modules/
+
+# Ignore node_modules
+frontend/node_modules/
+
+# Ignore other IDE/editor files (if applicable)
+.vscode/
+.idea/
+*.log
