@@ -10,7 +10,7 @@ from sklearn.metrics import classification_report
 def normalize_word(word):
     replacements = {
         '@': 'a', '1': 'i', '!': 'i', '3': 'e', '0': 'o', '7': 't',
-       r'\|\|': 'n', r'\|\\\|': 'n', r'\\': 'l', r'\(': 'c', r'\)': 'c', '5': 's'
+       r'\|\|': 'n', r'\|\\\|': 'n', r'\\': 'l', r'\(': 'c', r'\)': 'c', '5': 's', '9': 'g'
     }
     
     # Apply replacements
@@ -111,4 +111,4 @@ def predict_severity(word):
     return {"original": word, "normalized": normalized_word, "severity": severity}
 
 # Example usage
-print(predict_severity("fkcing"))
+print(predict_severity("fa9g07"))
