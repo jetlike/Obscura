@@ -9,6 +9,7 @@ LEETSPEAK_MAP = {
     
 }
 
+# this method is supposed to like normalize weird characters into normal letters, but depending on like the context based shit or ai shit you might not need this
 def normalize_leetspeak(text: str) -> str:
     """
     Normalize leetspeak characters in the text to their normal alphabetic equivalents.

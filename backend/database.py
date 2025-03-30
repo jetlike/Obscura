@@ -1,6 +1,7 @@
 from supabase import create_client
 import os
 from dotenv import load_dotenv
+import uuid
 
 # Load .env file explicitly, pointing to the root directory
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../.env'))
@@ -82,6 +83,22 @@ def delete_banned_word(word: str):
 # Interactions with company_settings Table
 # =======================
 
+def generate_api_key() -> str:
+    """
+    Generate a unique API key for each company.
+    Ensures the generated API key does not already exist in the database.
+    """
+    while True:
+        # Generate a new API key
+        new_api_key = str(uuid.uuid4())
+        
+        # Check if the new API key already exists in the database
+        existing_company = supabase.table("company_settings").select("api_key").eq("api_key", new_api_key).execute()
+        
+        # If the API key doesn't exist, it's safe to use
+        if not existing_company.data:
+            return new_api_key
+
 def insert_company(company_name: str, api_key: str, custom_banned_words: list):
     """
     Insert a new company into the company_settings table.
@@ -97,13 +114,24 @@ def insert_company(company_name: str, api_key: str, custom_banned_words: list):
     else:
         print(f"Failed to insert company {company_name}: {response.data}")
 
+def get_company_by_name(company_name: str):
+    """
+    Retrieve a company from the company_settings table by company name.
+    """
+    response = supabase.table("company_settings").select("*").eq("company_name", company_name).execute()
+    
+    if response.data:
+        return response.data[0]  # Return the first matching company
+    else:
+        return None  # No matching company found
+
 def get_company_by_api_key(api_key: str):
     """
     Retrieve a company from company_settings by API key.
     """
     response = supabase.table("company_settings").select("*").eq("api_key", api_key).execute()
     if response.data:
-        return response.data
+        return response.data[0]
     else:
         print(f"Failed to retrieve company: {response.data}")
         return []

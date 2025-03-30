@@ -1,8 +1,28 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from filter import normalize_leetspeak, check_profanity
+from database import insert_company, get_company_by_name, generate_api_key
 
 app = FastAPI()
+
+# Define user registration
+class UserRegistration(BaseModel):
+    name: str
+    custom_banned_words: list[str]
+    
+@app.post("/register")
+async def register_company(company: UserRegistration):
+    # Check if company with the same API key already exists
+    existing_company = get_company_by_name(company.name)
+    if existing_company:
+        raise HTTPException(status_code=400, detail="Company with this API key already exists.")
+    
+    # Generate a new unique API key
+    api_key = generate_api_key()
+    
+    # Register the company
+    insert_company(company.name, api_key, company.custom_banned_words)
+    return {"message": "Company registered successfully"}
 
 # Define input model
 class TextInput(BaseModel):
