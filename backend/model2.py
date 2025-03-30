@@ -65,7 +65,10 @@ data = [
     ("great", 0),
     ("awesome", 0),
     ("peace", 0),
-    ("dick", 5)
+    ("dick", 5),
+    (".", 0),
+    (",", 0),
+    ("!", 0)
 ]
 
 # Normalize dataset
@@ -98,4 +101,4 @@ def predict_severity(word):
     return {"original": word, "normalized": normalized_word, "severity": severity}
 
 # Example usage
-print(predict_severity("_f-u_c-k"))
+print(predict_severity("!"))
