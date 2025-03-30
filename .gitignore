@@ -2,10 +2,28 @@
 venv/
 .env
 
-# Ignore node_modules
+# Ignore node_modules (React app dependencies)
 frontend/node_modules/
 
-# Ignore other IDE/editor files (if applicable)
+# Build output (React build artifacts)
+frontend/build/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE/editor folders and files
 .vscode/
 .idea/
+
+# Operating system files (macOS/Windows)
+.DS_Store
+Thumbs.db
+
+# Optional: Coverage folder (for testing)
+coverage/
+
+# Optional: Files from running tests
 *.log
+*.tmp
