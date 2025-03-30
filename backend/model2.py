@@ -9,8 +9,10 @@ from sklearn.metrics import classification_report
 # Function to normalize profanity replacements
 def normalize_word(word):
     replacements = {
-        '@': 'a', '1': 'i', '!': 'i', '3': 'e', '0': 'o', '7': 't',
-       r'\|\|': 'n', r'\|\\\|': 'n', r'\\': 'l', r'\(': 'c', r'\)': 'c', '5': 's', '9': 'g'
+        '@': 'a', '1': 'i', '!': 'i', '3': 'e', '0': 'o', '7': 't', '9': 'g',
+        r'\|\|': 'n', r'\|\\\|': 'n', r'/\|/': 'n', r'/\\/': 'n', r'/\/': 'n',
+        r'\\': 'l', r'\(': 'c', r'\)': 'c', '5': 's',
+        r'\/\/': 'w', r'\\\/': 'w', r'\|/': 'w', r'vv': 'w'
     }
     
     # Apply replacements
@@ -111,4 +113,4 @@ def predict_severity(word):
     return {"original": word, "normalized": normalized_word, "severity": severity}
 
 # Example usage
-print(predict_severity("fa9g07"))
+print(predict_severity("|\|igga"))
