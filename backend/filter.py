@@ -30,9 +30,10 @@ def check_profanity(text: str, api_key: str) -> dict:
     
     if not company_data:
         return {"error": "Invalid API key"}
+    print(company_data)
 
-    company_id = company_data[0]["company_id"]
-    custom_banned_words = set(company_data[0].get("custom_banned_words", []))
+    company_id = company_data["company_id"]
+    custom_banned_words = set(company_data.get("custom_banned_words", []))
 
     # Fetch global banned words and merge with company-specific ones
     global_banned_words = {entry["word"] for entry in get_banned_words()}
