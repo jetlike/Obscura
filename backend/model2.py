@@ -18,6 +18,8 @@ def normalize_word(word):
         word = re.sub(key, val, word)
     #print(f"After replacements: {word}")
     # Handle repeated characters (e.g., fuuuuck -> fuck)
+    word = re.sub(r'[\_\-]+', '', word)
+    word = re.sub(r'\s+', ' ', word).strip()
     word = re.sub(r'(.)\1{2,}', r'\1', word)
     #print(f"After removing repeated characters: {word}")
     # Common misspellings
@@ -96,4 +98,4 @@ def predict_severity(word):
     return {"original": word, "normalized": normalized_word, "severity": severity}
 
 # Example usage
-print(predict_severity("wow!"))
+print(predict_severity("_f-u_c-k"))
