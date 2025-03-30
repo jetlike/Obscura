@@ -47,8 +47,6 @@ def insert_banned_word(word: str):
     else:
         print(f"Failed to insert '{word}': {response.data}")
 
-
-
 def get_banned_words():
     """
     Retrieve all banned words from the banned_words table.
@@ -59,6 +57,16 @@ def get_banned_words():
     else:
         print(f"Failed to retrieve banned words: {response.data}")
         return []
+    
+def check_banned_word(word: str) -> bool:
+    """
+    Check if a word is banned by querying the banned_words table in Supabase.
+    """
+    response = supabase.table("banned_words").select("word").eq("word", word.lower()).execute()
+    
+    if response.data:
+        return True  # The word is banned
+    return False  # The word is not banned
 
 def delete_banned_word(word: str):
     """
@@ -190,7 +198,7 @@ def delete_flagged_message(message_id: int):
         print(f"Failed to delete flagged message with ID {message_id}: {response.data}")
 
 ### DONT RUN THIS LIKE EVER, ONLY USED FOR BASE LEVEL TESTING WHEN I SET UP THE PROJECT
-########################
+######################## ALSO IM PRETTY SURE THIS SHIT DONT EVEN WORK
 def delete_all_data():
     """
     Deletes all data from the banned_words, company_settings, and flagged_messages tables.
