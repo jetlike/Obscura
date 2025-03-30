@@ -30,6 +30,10 @@ def normalize_word(word):
 # Sample dataset (Word, Severity Level)
 data = [
     ("fuck", 5),
+    ("nigga", 5),
+    ("nigger", 5),
+    ("faggot", 5),
+    ("chink", 5),
     ("shit", 5),
     ("bitch", 5),
     ("ass", 5),
@@ -42,6 +46,7 @@ data = [
     ("dang", 2),
     ("butt", 1),
     ("poop", 1),
+    ("potty", 1),
     ("golly", 0),
     ("gee", 0),
     ("sh1t", 5),
