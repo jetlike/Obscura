@@ -114,3 +114,5 @@ def predict_severity(word):
 
 # Example usage
 print(predict_severity("|\|igga"))
+
+# TODO: have to sync up the data in here with the data in the supabase database

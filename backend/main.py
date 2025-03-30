@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from filter import normalize_leetspeak, check_profanity
+from filter import check_profanity
 from database import insert_company, get_company_by_name, generate_api_key, get_flagged_messages, get_company_by_api_key
 
 app = FastAPI()
@@ -31,11 +31,8 @@ class TextInput(BaseModel):
 
 @app.post("/moderate")
 def moderate_text(input_text: TextInput):
-    # Normalize leetspeak
-    normalized_text = normalize_leetspeak(input_text.text)
-
     # Check profanity and return censored text and flagged words
-    result = check_profanity(normalized_text, input_text.api_key)
+    result = check_profanity(input_text.text, input_text.api_key)
 
     # If error occurs (e.g., invalid API key), raise an exception
     if "error" in result:

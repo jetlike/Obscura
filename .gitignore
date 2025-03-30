@@ -27,3 +27,4 @@ coverage/
 # Optional: Files from running tests
 *.log
 *.tmp
+backend/test_database.py
