@@ -14,10 +14,8 @@ def normalize_leetspeak(text: str) -> str:
     """
     Normalize leetspeak characters in the text to their normal alphabetic equivalents.
     """
-    print(text)
     for leet, normal in LEETSPEAK_MAP.items():
         text = text.replace(leet, normal)
-    print(text)
     return text
 
 def check_profanity(text: str, api_key: str) -> dict:
@@ -30,7 +28,6 @@ def check_profanity(text: str, api_key: str) -> dict:
     
     if not company_data:
         return {"error": "Invalid API key"}
-    print(company_data)
 
     company_id = company_data["company_id"]
     custom_banned_words = set(company_data.get("custom_banned_words", []))
