@@ -1,4 +1,5 @@
 # Obscura - Text Censorship Tool
+# RecordHacks 2025
 
 A text censorship tool designed for video games and applications to automatically detect and censor bad words, including variations of offensive language like leetspeak, with an optional analytics dashboard.
 
